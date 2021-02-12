@@ -358,8 +358,6 @@ wqbEngGEtTQckXOiSqa9dX6JXTVuZtegdEenpVLncYnI3Ns50G5x8BIGY+OXu1bv
 sLAxjojallMfVm0vdV1xZhyrt0uwUl7X0lGKMLXI1+8LhTYyqVICclqrHpe3tacc
 Ew==
 -----END CERTIFICATE-----
-</ca>
-<cert>
 EOF7
  cat <<'EOF9'> /etc/openvpn/server.crt
 Certificate:
@@ -470,8 +468,6 @@ DArv9YRvRWFYO1MWiuX9YjflHQ0AtwpHL+j24N90zJdOGgIctW1GScj52sQVO7JN
 2BLESEaqHzsde2EiCNVGad5Pns4/MDMqIIDyxY+6YgGdrac5haTdl7PxtaDAQuIs
 +bd2FBJbzKqL8e7WiMj0D/RL
 -----END CERTIFICATE-----
-</cert>
-<key>
 EOF9
  cat <<'EOF10'> /etc/openvpn/server.key
 -----BEGIN PRIVATE KEY-----
@@ -514,8 +510,6 @@ corRO37Btk9RPxxMrfMVAoHBALYviiVchzE6clEJpNuFjE+uK7chuIVOIfyGQU0p
 VO8OWkpf8uS56zFmpN1Db19+5xFJLmPMcJQISrgT4WdUmsDE9mOoSklFazxLjg5J
 dr3Szfw/1BrXI2OgvFxke2i6hA==
 -----END PRIVATE KEY-----
-</key>
-<tls-auth>
 EOF10
  cat <<'EOF13'> /etc/openvpn/ta.key
 #
@@ -838,8 +832,14 @@ sam
 </auth-user-pass>
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF15
@@ -870,8 +870,14 @@ http-proxy $IPADDR $Squid_Port1
 http-proxy-retry
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF16
@@ -903,8 +909,14 @@ verb 1
 
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF162
@@ -938,8 +950,14 @@ verb 0
 nice -20
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF17
@@ -976,8 +994,14 @@ http-proxy $IPADDR $Privoxy_Port1
 http-proxy-retry
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF152
@@ -1013,8 +1037,14 @@ http-proxy $IPADDR $Privoxy_Port1
 http-proxy-retry
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF1152
@@ -1050,56 +1080,17 @@ http-proxy $IPADDR 3356
 http-proxy-retry
 <ca>
 $(cat /etc/openvpn/ca.crt)
+</ca>
+<cert>
 $(cat /etc/openvpn/server.crt)
+</cert>
+<key>
 $(cat /etc/openvpn/server.key)
+</key>
+<tls-auth>
 $(cat /etc/openvpn/ta.key)
 </tls-auth>
 EOF1632
-
-# Setting UFW
-apt-get install ufw
-ufw allow ssh
-ufw allow 1103/tcp
-sed -i 's|DEFAULT_INPUT_POLICY="DROP"|DEFAULT_INPUT_POLICY="ACCEPT"|' /etc/default/ufw
-sed -i 's|DEFAULT_FORWARD_POLICY="DROP"|DEFAULT_FORWARD_POLICY="ACCEPT"|' /etc/default/ufw
-cat > /etc/ufw/before.rules <<-END
-# START OPENVPN RULES
-# NAT table rules
-*nat
-:POSTROUTING ACCEPT [0:0]
-# Allow traffic from OpenVPN client to eth0
--A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
-COMMIT
-# END OPENVPN RULES
-END
-ufw status
-ufw disable
-
-# OpenVPN monitoring
-apt-get install -y gcc libgeoip-dev python-virtualenv python-dev geoip-database-extra uwsgi uwsgi-plugin-python
-wget -O /srv/openvpn-monitor.tar "https://raw.githubusercontent.com/gatotx/AutoScriptDebian9/main/Res/Panel/openvpn-monitor.tar"
-cd /srv
-tar xf openvpn-monitor.tar
-cd openvpn-monitor
-virtualenv .
-. bin/activate
-pip install -r requirements.txt
-wget -O /etc/uwsgi/apps-available/openvpn-monitor.ini "https://raw.githubusercontent.com/gatotx/AutoScriptDebian9/main/Res/Panel/openvpn-monitor.ini"
-ln -s /etc/uwsgi/apps-available/openvpn-monitor.ini /etc/uwsgi/apps-enabled/
-
-#pivpn
-curl https://raw.githubusercontent.com/pivpn/pivpn/master/auto_install/install.sh | bash
-
-#Shadowsocks
-wget -N --no-check-certificate -c -t3 -T60 -O ss-plugins.sh https://git.io/fjlbl
-chmod +x ss-plugins.sh
-
-#v2ray
-source <(curl -sL https://multi.netlify.com/v2ray.sh) --zh
-
-#obfs proxy
-wget -O /etc/openvpn/ "https://raw.githubusercontent.com/HRomie/obfs4proxy-openvpn/master/obfs4proxy-openvpn"
-chmod +x /etc/openvn/obfs4proxy-openvpn
 
  # Creating OVPN download site index.html
 cat <<'mySiteOvpn' > /var/www/openvpn/index.html
