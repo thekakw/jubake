@@ -912,18 +912,18 @@ sam
 sam
 </auth-user-pass>
 EOF15
-echo '<ca>' >> /home/vps/public_html/tcp.ovpn
-cat /etc/openvpn/ca.crt >> /home/vps/public_html/tcp.ovpn
-echo '</ca>' >> /home/vps/public_html/tcp.ovpn
-echo '<client>' >> /home/vps/public_html/tcp.ovpn
-cat /etc/openvpn/client.crt >> /home/vps/public_html/tcp.ovpn
-echo '</cert>' >> /home/vps/public_html/tcp.ovpn
-echo '<key>' >> /home/vps/public_html/tcp.ovpn
-cat /etc/openvpn/client.key >> /home/vps/public_html/tcp.ovpn
-echo '</key>' >> /home/vps/public_html/tcp.ovpn
-echo '<tls-auth>' >> /home/vps/public_html/tcp.ovpn
-cat /etc/openvpn/tls-auth >> /home/vps/public_html/tcp.ovpn
-echo '</tls-auth>' >> /home/vps/public_html/tcp.ovpn
+echo '<ca>' >> /var/www/openvpn/tcp.ovpn
+cat /etc/openvpn/ca.crt >> /var/www/openvpn/tcp.ovpn
+echo '</ca>' >> /var/www/openvpn/tcp.ovpn
+echo '<client>' >> /var/www/openvpn/tcp.ovpn
+cat /etc/openvpn/client.crt >> /var/www/openvpn/tcp.ovpn
+echo '</cert>' >> /var/www/openvpn/tcp.ovpn
+echo '<key>' >> /var/www/openvpn/tcp.ovpn
+cat /etc/openvpn/client.key >> /var/www/openvpn/tcp.ovpn
+echo '</key>' >> /var/www/openvpn/tcp.ovpn
+echo '<tls-auth>' >> /var/www/openvpn/tcp.ovpn
+cat /etc/openvpn/tls-auth >> /var/www/openvpn/tcp.ovpn
+echo '</tls-auth>' >> /var/www/openvpn/tcp.ovpn
 
 cat <<EOF16> /var/www/openvpn/udp.ovpn
 # Credits to GakodX
@@ -956,18 +956,18 @@ sam
 sam
 </auth-user-pass>
 EOF16
-echo '<ca>' >> /home/vps/public_html/udp.ovpn
-cat /etc/openvpn/ca.crt >> /home/vps/public_html/udp.ovpn
-echo '</ca>' >> /home/vps/public_html/udp.ovpn
-echo '<client>' >> /home/vps/public_html/udp.ovpn
-cat /etc/openvpn/client.crt >> /home/vps/public_html/udp.ovpn
-echo '</cert>' >> /home/vps/public_html/udp.ovpn
-echo '<key>' >> /home/vps/public_html/udp.ovpn
-cat /etc/openvpn/client.key >> /home/vps/public_html/udp.ovpn
-echo '</key>' >> /home/vps/public_html/udp.ovpn
-echo '<tls-auth>' >> /home/vps/public_html/udp.ovpn
-cat /etc/openvpn/tls-auth >> /home/vps/public_html/udp.ovpn
-echo '</tls-auth>' >> /home/vps/public_html/udp.ovpn
+echo '<ca>' >> /var/www/openvpn/udp.ovpn
+cat /etc/openvpn/ca.crt >> /var/www/openvpn/udp.ovpn
+echo '</ca>' >> /var/www/openvpn/udp.ovpn
+echo '<cert>' >> /var/www/openvpn/udp.ovpn
+cat /etc/openvpn/client.crt >> /var/www/openvpn/udp.ovpn
+echo '</cert>' >> /var/www/openvpn/udp.ovpn
+echo '<key>' >> /var/www/openvpn/udp.ovpn
+cat /etc/openvpn/client.key >> /var/www/openvpn/udp.ovpn
+echo '</key>' >> /var/www/openvpn/udp.ovpn
+echo '<tls-auth>' >> /var/www/openvpn/udp.ovpn
+cat /etc/openvpn/tls-auth >> /var/www/openvpn/udp.ovpn
+echo '</tls-auth>' >> /var/www/openvpn/udp.ovpn
 
 
 cat <<EOF17> /var/www/openvpn/ssl.ovpn
@@ -1001,18 +1001,18 @@ sam
 sam
 </auth-user-pass>
 EOF17
-echo '<ca>' >> /home/vps/public_html/ssl.ovpn
-cat /etc/openvpn/ca.crt >> /home/vps/public_html/ssl.ovpn
-echo '</ca>' >> /home/vps/public_html/ssl.ovpn
-echo '<client>' >> /home/vps/public_html/ssl.ovpn
-cat /etc/openvpn/client.crt >> /home/vps/public_html/ssl.ovpn
-echo '</cert>' >> /home/vps/public_html/ssl.ovpn
-echo '<key>' >> /home/vps/public_html/ssl.ovpn
-cat /etc/openvpn/client.key >> /home/vps/public_html/ssl.ovpn
-echo '</key>' >> /home/vps/public_html/ssl.ovpn
-echo '<tls-auth>' >> /home/vps/public_html/ssl.ovpn
-cat /etc/openvpn/tls-auth >> /home/vps/public_html/ssl.ovpn
-echo '</tls-auth>' >> /home/vps/public_html/ssl.ovpn
+echo '<ca>' >> /var/www/openvpn/ssl.ovpn
+cat /etc/openvpn/ca.crt >> /var/www/openvpn/ssl.ovpn
+echo '</ca>' >> /var/www/openvpn/ssl.ovpn
+echo '<client>' >> /var/www/openvpn/ssl.ovpn
+cat /etc/openvpn/client.crt >> /var/www/openvpn/ssl.ovpn
+echo '</cert>' >> /var/www/openvpn/ssl.ovpn
+echo '<key>' >> /var/www/openvpn/ssl.ovpn
+cat /etc/openvpn/client.key >> /var/www/openvpn/ssl.ovpn
+echo '</key>' >> /var/www/openvpn/ssl.ovpn
+echo '<tls-auth>' >> /var/www/openvpn/ssl.ovpn
+cat /etc/openvpn/tls-auth >> /var/www/openvpn/ssl.ovpn
+echo '</tls-auth>' >> /var/www/openvpn/ssl.ovpn
 
 # OpenVPN monitoring
 apt-get install -y gcc libgeoip-dev python-virtualenv python-dev geoip-database-extra uwsgi uwsgi-plugin-python
