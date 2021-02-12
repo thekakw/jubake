@@ -912,18 +912,18 @@ sam
 sam
 </auth-user-pass>
 EOF15
-echo '<ca>' >> /home/vps/public_html/client.ovpn
-cat /etc/openvpn/ca.crt >> /home/vps/public_html/client.ovpn
-echo '</ca>' >> /home/vps/public_html/client.ovpn
-echo '<client>' >> /home/vps/public_html/client.ovpn
-cat /etc/openvpn/client.crt >> /home/vps/public_html/client.ovpn
-echo '</cert>' >> /home/vps/public_html/client.ovpn
-echo '<key>' >> /home/vps/public_html/client.ovpn
-cat /etc/openvpn/client.key >> /home/vps/public_html/client.ovpn
-echo '</key>' >> /home/vps/public_html/client.ovpn
-echo '<tls-auth>' >> /home/vps/public_html/client.ovpn
-cat /etc/openvpn/tls-auth >> /home/vps/public_html/client.ovpn
-echo '</tls-auth>' >> /home/vps/public_html/client.ovpn
+echo '<ca>' >> /home/vps/public_html/tcp.ovpn
+cat /etc/openvpn/ca.crt >> /home/vps/public_html/tcp.ovpn
+echo '</ca>' >> /home/vps/public_html/tcp.ovpn
+echo '<client>' >> /home/vps/public_html/tcp.ovpn
+cat /etc/openvpn/client.crt >> /home/vps/public_html/tcp.ovpn
+echo '</cert>' >> /home/vps/public_html/tcp.ovpn
+echo '<key>' >> /home/vps/public_html/tcp.ovpn
+cat /etc/openvpn/client.key >> /home/vps/public_html/tcp.ovpn
+echo '</key>' >> /home/vps/public_html/tcp.ovpn
+echo '<tls-auth>' >> /home/vps/public_html/tcp.ovpn
+cat /etc/openvpn/tls-auth >> /home/vps/public_html/tcp.ovpn
+echo '</tls-auth>' >> /home/vps/public_html/tcp.ovpn
 
 cat <<EOF16> /var/www/openvpn/udp.ovpn
 # Credits to GakodX
