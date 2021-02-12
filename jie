@@ -922,7 +922,7 @@ echo '<key>' >> /var/www/openvpn/tcp.ovpn
 cat /etc/openvpn/client.key >> /var/www/openvpn/tcp.ovpn
 echo '</key>' >> /var/www/openvpn/tcp.ovpn
 echo '<tls-auth>' >> /var/www/openvpn/tcp.ovpn
-cat /etc/openvpn/tls-auth >> /var/www/openvpn/tcp.ovpn
+cat /etc/openvpn/tls-auth.key >> /var/www/openvpn/tcp.ovpn
 echo '</tls-auth>' >> /var/www/openvpn/tcp.ovpn
 
 cat <<EOF16> /var/www/openvpn/udp.ovpn
@@ -966,7 +966,7 @@ echo '<key>' >> /var/www/openvpn/udp.ovpn
 cat /etc/openvpn/client.key >> /var/www/openvpn/udp.ovpn
 echo '</key>' >> /var/www/openvpn/udp.ovpn
 echo '<tls-auth>' >> /var/www/openvpn/udp.ovpn
-cat /etc/openvpn/tls-auth >> /var/www/openvpn/udp.ovpn
+cat /etc/openvpn/tls-auth.key >> /var/www/openvpn/udp.ovpn
 echo '</tls-auth>' >> /var/www/openvpn/udp.ovpn
 
 
@@ -1011,7 +1011,7 @@ echo '<key>' >> /var/www/openvpn/ssl.ovpn
 cat /etc/openvpn/client.key >> /var/www/openvpn/ssl.ovpn
 echo '</key>' >> /var/www/openvpn/ssl.ovpn
 echo '<tls-auth>' >> /var/www/openvpn/ssl.ovpn
-cat /etc/openvpn/tls-auth >> /var/www/openvpn/ssl.ovpn
+cat /etc/openvpn/tls-auth.key >> /var/www/openvpn/ssl.ovpn
 echo '</tls-auth>' >> /var/www/openvpn/ssl.ovpn
 
 # OpenVPN monitoring
