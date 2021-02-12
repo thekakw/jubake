@@ -924,7 +924,7 @@ $(cat /etc/openvpn/client.key)
 <tls-auth>
 $(cat /etc/openvpn/tls-auth.key)
 </tls-auth>
-EOF152
+EOF15
 
 cat <<EOF16> /var/www/openvpn/udp.ovpn
 # Credits to GakodX
